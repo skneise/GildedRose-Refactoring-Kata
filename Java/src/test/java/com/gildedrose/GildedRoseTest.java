@@ -22,9 +22,24 @@ public class GildedRoseTest {
     }
 
     @Test
+    public void updateQuality_updatesAllItems() {
+        Item a = new Item("a", 10, 10);
+        Item b = new Item("b", 20, 10);
+        Item c = new Item("c", 30, 10);
+        Item[] items = new Item[]{a, b, c};
+
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(9);
+        assertThat(app.items[1].quality).isEqualTo(9);
+        assertThat(app.items[2].quality).isEqualTo(9);
+    }
+
+    @Test
     public void updateQuality_AgedBrie_qualityIncreasesBy1() {
         Item foo = new Item("Aged Brie", 1, 1);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -36,7 +51,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_AgedBrie_qualityIncreasesBy1ForZero() {
         Item foo = new Item("Aged Brie", 1, 0);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -48,7 +63,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_AgedBrie_qualityIncreasesBy2AtSellInDay() {
         Item foo = new Item("Aged Brie", 0, 0);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -60,7 +75,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_AgedBrie_qualityIncreasesBy2AfterSellIn() {
         Item foo = new Item("Aged Brie", -1, 0);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -73,7 +88,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_AgedBrie_quality_notHigherThan50() {
         Item foo = new Item("Aged Brie", 1, 50);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -85,7 +100,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_AgedBrie_qualityNotIncreasingAfter50() {
         Item foo = new Item("Aged Brie", 1, 51);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -99,7 +114,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_Default_qualityDecreasesBy1() {
         Item foo = new Item("Default Item", 2, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -111,7 +126,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_Default_qualityDecreaseBy1() {
         Item foo = new Item("Default Item", 1, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -123,7 +138,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_Default_qualityNotLowerThanZero() {
         Item foo = new Item("Default Item", 1, 0);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -135,7 +150,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_Default_qualityDecreaseBy2AfterSellIn() {
         Item foo = new Item("Default Item", 0, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -151,7 +166,7 @@ public class GildedRoseTest {
     @Test
     public void updateQuality_BackstagePass_qualityDecreaseBy1ForMoreThan10Days() {
         Item foo = new Item("Backstage passes to a Ramstein concert", 11, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -207,7 +222,7 @@ public class GildedRoseTest {
         assertThat(app.items[0].sellIn).isEqualTo(0);
         assertThat(app.items[0].quality).isEqualTo(13);
     }
-    
+
     @Test
     public void updateQuality_BackstagePass_qualityDropsToZero() {
         Item foo = new Item("Backstage passes to a Ramstein concert", 0, 10);
@@ -262,11 +277,11 @@ public class GildedRoseTest {
 //    Conjured
 
 
-    @Ignore
+//    @Ignore
     @Test
     public void updateQuality_Conjured_qualityDecreasesBy2() {
         Item foo = new Item("Conjured", 2, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -275,11 +290,11 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isEqualTo(8);
     }
 
-    @Ignore
+//    @Ignore
     @Test
-    public void updateQuality_Conjured_qualityDecreaseBy2() {
+    public void updateQuality_Conjured_qualityDecreasesBy2OnLastDay() {
         Item foo = new Item("Conjured", 1, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
@@ -288,17 +303,17 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isEqualTo(8);
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void updateQuality_Conjured_qualityDecreaseBy2AfterSellIn() {
         Item foo = new Item("Conjured", 0, 10);
-        Item[] items = new Item[] {foo};
+        Item[] items = new Item[]{foo};
 
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
         assertThat(app.items[0].sellIn).isEqualTo(-1);
-        assertThat(app.items[0].quality).isEqualTo(8);
+        assertThat(app.items[0].quality).isEqualTo(6);
     }
 
 }
