@@ -1,6 +1,5 @@
 package com.gildedrose;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -273,47 +272,5 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isEqualTo(80);
     }
 
-
-//    Conjured
-
-
-//    @Ignore
-    @Test
-    public void updateQuality_Conjured_qualityDecreasesBy2() {
-        Item foo = new Item("Conjured", 2, 10);
-        Item[] items = new Item[]{foo};
-
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-
-        assertThat(app.items[0].sellIn).isEqualTo(1);
-        assertThat(app.items[0].quality).isEqualTo(8);
-    }
-
-//    @Ignore
-    @Test
-    public void updateQuality_Conjured_qualityDecreasesBy2OnLastDay() {
-        Item foo = new Item("Conjured", 1, 10);
-        Item[] items = new Item[]{foo};
-
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-
-        assertThat(app.items[0].sellIn).isEqualTo(0);
-        assertThat(app.items[0].quality).isEqualTo(8);
-    }
-
-//    @Ignore
-    @Test
-    public void updateQuality_Conjured_qualityDecreaseBy2AfterSellIn() {
-        Item foo = new Item("Conjured", 0, 10);
-        Item[] items = new Item[]{foo};
-
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-
-        assertThat(app.items[0].sellIn).isEqualTo(-1);
-        assertThat(app.items[0].quality).isEqualTo(6);
-    }
 
 }
